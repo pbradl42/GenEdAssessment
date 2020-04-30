@@ -39,7 +39,12 @@ vignettes/*.pdf
 .Renviron
 
 # the raw data files are FERPA protected
-data/
+rawdata/*
+!rawdata/.gitkeep
+
 
 # the output files also contain FERPA data
-output/
+output/data/*
+!output/data/.gitkeep
+output/workbooks/*
+!output/workbooks/.gitkeep
