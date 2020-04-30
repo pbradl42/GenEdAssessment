@@ -1,9 +1,11 @@
-## General Education Assessment 2.0##  
+## General Education Assessment 2.0 ##  
 
 This is the final version of my new assessment work flow.
 
-###Project organization###
-```.
+### Project organization ###
+
+```
+.
 ├── GenEdAssessment.Rproj = RStudio project file  
 ├── LICENSE               = MIT license  
 ├── README.md             = This file  
@@ -13,6 +15,6 @@ This is the final version of my new assessment work flow.
 │   ├── summary           = Summary reports  
 │   └── workbooks         = Assessment workbooks organized by competency  
 ├── rawdata               = Original data file; DO NOT MODIFY!  
-└── src                   = All R script files used```  
-
-
+└── src                   = All R script files used
+```
+Describe this here...
