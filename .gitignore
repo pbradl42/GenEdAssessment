@@ -37,3 +37,9 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# the raw data files are FERPA protected
+data/
+
+# the output files also contain FERPA data
+output/
