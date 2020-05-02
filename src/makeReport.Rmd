@@ -178,6 +178,9 @@ Records <- c(collRecords,comsRecords,comwRecords,cultRecords,divgRecords,divuRec
 summaryTable <- tibble(Competency=Competency,Courses=Courses,Sections=Sections,Instructors=Instructors,Students=Students,Records=Records)
 summaryTable <- summaryTable %>% 
 	add_row(Competency="Totals",Courses=sum(Courses),Sections=sum(Sections),Instructors=sum(Instructors),Students=sum(Students),Records=sum(Records))
+
+## Record the tibble as a csv file in our temporary data file
+write_csv(summaryTable, "../output/data/reportTable.csv")
 ```
 
 The General Education instructional dataset for the `r theSemester` semester of `r theYear` included a total of `r comma(length(myData$CRN),format="d")` student records. This represented `r comma(length(unique(myData$Course)),format="d")` courses which were delivered in `r comma(length(unique(myData$CRN)),format="d")` total sections. These classes were taught by `r comma(length(unique(myData$Instructor)),format="d")` different instructors. Some students were enrolled in more than one General Education course for a particular competency. Therefore, there were fewer unique students (`r comma(length(unique(myData$Name)),format="d")`) than records. In addition, some courses count for more than one of the General Education core competencies (double- or triple-dippers). Because of this, there are more total values (when adding up all the competencies) than the original dataset actually contained. Here is a brief breakdown of the records for this semester.
