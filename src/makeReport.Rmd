@@ -1,0 +1,188 @@
+---
+title: "General Education Offerings, Spring 2020"
+author: "Dr. Clifton Franklund"
+date: "4/22/2020"
+output:
+  html_document: default
+  word_document: default
+  pdf_document: default
+always_allow_html: yes
+---
+
+```{r libraries, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, results=FALSE}
+## READ IN THE LIBRARIES THAT WE NEED
+library(tidyverse)
+library(readxl)
+library(writexl)
+library(knitr)
+library(pander)
+library(formattable)
+```
+
+```{r variables, echo=FALSE}
+## SET THE VARIABLES FOR THE ASSESSMENT PERIOD HERE
+theYear <- "2020"
+theSemester <- "Spring"
+collVar <- "COL1"
+comsVar <- "COMS1"
+comwVar <- "COMW1"
+cultVar <- "CUL1"
+divgVar <- "DIVG1"
+divuVar <- "DIVU1"
+nsciVar <- "SCI1"
+probVar <- "PRB1"
+quanVar <- "QNT1"
+ssocVar <- "SOC1"
+```
+
+```{r pander, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+# set pander table-layout options
+library(pander)
+panderOptions('table.alignment.default', function(df)
+    ifelse(sapply(df, is.numeric), 'right', 'left'))
+panderOptions('table.split.table', Inf)
+panderOptions('big.mark', ",")
+panderOptions('keep.trailing.zeros', TRUE)
+```
+
+```{r data, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+## READ IN THE DATA AND FORMAT IT
+myData <- read_xlsx("../rawdata/202001-GenEd-Data.xlsx")
+
+#--> Rename the variables
+myData <- myData %>%  rename(Term=TERM,
+					CRN=CRN,
+					College=COURSE_COLL_CODE,
+					Prefix=SUBJ,
+					Number=CRSE_NUMB,
+					Section=SECTION,
+					ID=ID,
+					Name=STU_NAME,
+					Instructor=INSTR_NAME)
+
+#--> Recode the colleges
+myData[myData$College=="AS","College"] <- "CAS"
+myData[myData$College=="BU","College"] <- "COB"
+myData[myData$College=="ED","College"] <- "COEHS"
+myData[myData$College=="TE","College"] <- "CET"
+myData[myData$College=="HP","College"] <- "CHP"
+myData[myData$College=="UN","College"] <- "UNIV"
+
+#--> Add new variables
+myData$Course <- paste0(myData$Prefix,myData$Number)
+myData <- myData %>% separate(Instructor,c("Instructor.Last","Instructor.First"), ",", remove=FALSE)
+myData$Full.Name <- paste(myData$Instructor.First,myData$Instructor.Last)
+```
+
+```{r summarize, echo=FALSE, error=FALSE, warning=FALSE}
+## SPLIT OUT DATA BY COMPETENCY
+#--> COLL
+collData <- myData %>% 
+	filter(COLL == 1)
+collRecords <- length(collData$Name)
+collInstructors <- length(unique(collData$Instructor))
+collCourses <- length(unique(collData$Course))
+collSections <- length(unique(collData$CRN))
+collStudents <- length(unique(collData$Name))
+
+#---> COMS
+comsData <- myData %>% 
+	filter(COMS == 1)
+comsRecords <- length(comsData$Name)
+comsInstructors <- length(unique(comsData$Instructor))
+comsCourses <- length(unique(comsData$Course))
+comsSections <- length(unique(comsData$CRN))
+comsStudents <- length(unique(comsData$Name))
+
+#---> COMW
+comwData <- myData %>% 
+	filter(COMW == 1)
+comwRecords <- length(comwData$Name)
+comwInstructors <- length(unique(comwData$Instructor))
+comwCourses <- length(unique(comwData$Course))
+comwSections <- length(unique(comwData$CRN))
+comwStudents <- length(unique(comwData$Name))
+
+#---> CULT
+cultData <- myData %>% 
+	filter(!is.na(ACTC) | !is.na(CATC) | !is.na(CLTR))
+cultRecords <- length(cultData$Name)
+cultInstructors <- length(unique(cultData$Instructor))
+cultCourses <- length(unique(cultData$Course))
+cultSections <- length(unique(cultData$CRN))
+cultStudents <- length(unique(cultData$Name))
+
+#---> DIVG
+divgData <- myData %>% 
+	filter(DIVG == 1)
+divgRecords <- length(divgData$Name)
+divgInstructors <- length(unique(divgData$Instructor))
+divgCourses <- length(unique(divgData$Course))
+divgSections <- length(unique(divgData$CRN))
+divgStudents <- length(unique(divgData$Name))
+
+#---> DIVU
+divuData <- myData %>% 
+	filter(DIVU == 1)
+divuRecords <- length(divuData$Name)
+divuInstructors <- length(unique(divuData$Instructor))
+divuCourses <- length(unique(divuData$Course))
+divuSections <- length(unique(divuData$CRN))
+divuStudents <- length(unique(divuData$Name))
+
+#---> NSCI
+nsciData <- myData %>% 
+	filter(NSCL == 1 | NSCI == 1)
+nsciRecords <- length(nsciData$Name)
+nsciInstructors <- length(unique(nsciData$Instructor))
+nsciCourses <- length(unique(nsciData$Course))
+nsciSections <- length(unique(nsciData$CRN))
+nsciStudents <- length(unique(nsciData$Name))
+
+#---> PROB
+probData <- myData %>% 
+	filter(PROB == 1)
+probRecords <- length(probData$Name)
+probInstructors <- length(unique(probData$Instructor))
+probCourses <- length(unique(probData$Course))
+probSections <- length(unique(probData$CRN))
+probStudents <- length(unique(probData$Name))
+
+#---> QUAN
+quanData <- myData %>% 
+	filter(QUAL == 1)
+quanRecords <- length(quanData$Name)
+quanInstructors <- length(unique(quanData$Instructor))
+quanCourses <- length(unique(quanData$Course))
+quanSections <- length(unique(quanData$CRN))
+quanStudents <- length(unique(quanData$Name))
+
+#---> SSOC
+ssocData <- myData %>% 
+	filter(SSOC == 1 | SSOF == 1)
+ssocRecords <- length(ssocData$Name)
+ssocInstructors <- length(unique(ssocData$Instructor))
+ssocCourses <- length(unique(ssocData$Course))
+ssocSections <- length(unique(ssocData$CRN))
+ssocStudents <- length(unique(ssocData$Name))
+
+## MAKE A MASTER TIBBLE
+#--> Create vectors of data
+Competency <- c("Collaboration","Communication - Oral","Communication - Written","Culture","Diversity - Global","Diversity - Race, Ethnicity, Gender","Natural Sciences","Problem Solving","Quantitative Literacy","Self and Society")
+Courses <- c(collCourses,comsCourses,comwCourses,cultCourses,divgCourses,divuCourses,nsciCourses,probCourses,quanCourses,ssocCourses)
+Sections <- c(collSections,comsSections,comwSections,cultSections,divgSections,divuSections,nsciSections,probSections,quanSections,ssocSections)
+Instructors <- c(collInstructors,comsInstructors,comwInstructors,cultInstructors,divgInstructors,divuInstructors,nsciInstructors,probInstructors,quanInstructors,ssocInstructors)
+Students <- c(collStudents,comsStudents,comwStudents,cultStudents,divgStudents,divuStudents,nsciStudents,probStudents,quanStudents,ssocStudents)
+Records <- c(collRecords,comsRecords,comwRecords,cultRecords,divgRecords,divuRecords,nsciRecords,probRecords,quanRecords,ssocRecords)
+#--> Assemble into a tibble
+summaryTable <- tibble(Competency=Competency,Courses=Courses,Sections=Sections,Instructors=Instructors,Students=Students,Records=Records)
+summaryTable <- summaryTable %>% 
+	add_row(Competency="Totals",Courses=sum(Courses),Sections=sum(Sections),Instructors=sum(Instructors),Students=sum(Students),Records=sum(Records))
+```
+
+The General Education instructional dataset for the `r theSemester` semester of `r theYear` included a total of `r comma(length(myData$CRN),format="d")` student records. This represented `r comma(length(unique(myData$Course)),format="d")` courses which were delivered in `r comma(length(unique(myData$CRN)),format="d")` total sections. These classes were taught by `r comma(length(unique(myData$Instructor)),format="d")` different instructors. Some students were enrolled in more than one General Education course for a particular competency. Therefore, there were fewer unique students (`r comma(length(unique(myData$Name)),format="d")`) than records. In addition, some courses count for more than one of the General Education core competencies (double- or triple-dippers). Because of this, there are more total values (when adding up all the competencies) than the original dataset actually contained. Here is a brief breakdown of the records for this semester.
+
+```{r table, echo=FALSE}
+## PUT THE TIBBLE IN THE DOCUMENT AS A TABLE
+pander(summaryTable)
+```
