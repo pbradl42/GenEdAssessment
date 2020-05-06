@@ -1,5 +1,5 @@
 ---
-title: "General Education Offerings, Spring 2020"
+title: "General Education Offerings"
 author: "Dr. Clifton Franklund"
 date: "4/22/2020"
 output:
@@ -23,21 +23,6 @@ library(pander)
 library(formattable)
 ```
 
-```{r variables, echo=FALSE}
-## SET THE VARIABLES FOR THE ASSESSMENT PERIOD HERE
-theYear <- "2020"
-theSemester <- "Spring"
-collVar <- "COL1"
-comsVar <- "COMS1"
-comwVar <- "COMW1"
-cultVar <- "CUL1"
-divgVar <- "DIVG1"
-divuVar <- "DIVU1"
-nsciVar <- "SCI1"
-probVar <- "PRB1"
-quanVar <- "QNT1"
-ssocVar <- "SOC1"
-```
 
 ```{r pander, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE}
 # set pander table-layout options
@@ -49,40 +34,10 @@ panderOptions('big.mark', ",")
 panderOptions('keep.trailing.zeros', TRUE)
 ```
 
-```{r data, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE}
-## READ IN THE DATA AND FORMAT IT
-myData <- read_xlsx("../rawdata/202001-GenEd-Data.xlsx")
-
-#--> Rename the variables
-myData <- myData %>%  rename(Term=TERM,
-					CRN=CRN,
-					College=COURSE_COLL_CODE,
-					Prefix=SUBJ,
-					Number=CRSE_NUMB,
-					Section=SECTION,
-					ID=ID,
-					Name=STU_NAME,
-					Instructor=INSTR_NAME)
-
-#--> Recode the colleges
-myData[myData$College=="AS","College"] <- "CAS"
-myData[myData$College=="BU","College"] <- "COB"
-myData[myData$College=="ED","College"] <- "COEHS"
-myData[myData$College=="TE","College"] <- "CET"
-myData[myData$College=="HP","College"] <- "CHP"
-myData[myData$College=="UN","College"] <- "UNIV"
-
-#--> Add new variables
-myData$Course <- paste0(myData$Prefix,myData$Number)
-myData <- myData %>% separate(Instructor,c("Instructor.Last","Instructor.First"), ",", remove=FALSE)
-myData$Full.Name <- paste(myData$Instructor.First,myData$Instructor.Last)
-```
-
-```{r summarize, echo=FALSE, error=FALSE, warning=FALSE}
-## SPLIT OUT DATA BY COMPETENCY
+```{r summarize, echo=FALSE, error=FALSE, warning=FALSE, message=FALSE}
+## SUMMARIZE DATA BY COMPETENCY
 #--> COLL
-collData <- myData %>% 
-	filter(COLL == 1)
+collData <- read_csv("../output/data/collData.csv")
 collRecords <- length(collData$Name)
 collInstructors <- length(unique(collData$Instructor))
 collCourses <- length(unique(collData$Course))
@@ -90,8 +45,7 @@ collSections <- length(unique(collData$CRN))
 collStudents <- length(unique(collData$Name))
 
 #---> COMS
-comsData <- myData %>% 
-	filter(COMS == 1)
+comsData <- read_csv("../output/data/comsData.csv")
 comsRecords <- length(comsData$Name)
 comsInstructors <- length(unique(comsData$Instructor))
 comsCourses <- length(unique(comsData$Course))
@@ -99,8 +53,7 @@ comsSections <- length(unique(comsData$CRN))
 comsStudents <- length(unique(comsData$Name))
 
 #---> COMW
-comwData <- myData %>% 
-	filter(COMW == 1)
+comwData <- read_csv("../output/data/comwData.csv")
 comwRecords <- length(comwData$Name)
 comwInstructors <- length(unique(comwData$Instructor))
 comwCourses <- length(unique(comwData$Course))
@@ -108,8 +61,7 @@ comwSections <- length(unique(comwData$CRN))
 comwStudents <- length(unique(comwData$Name))
 
 #---> CULT
-cultData <- myData %>% 
-	filter(!is.na(ACTC) | !is.na(CATC) | !is.na(CLTR))
+cultData <- read_csv("../output/data/cultData.csv")
 cultRecords <- length(cultData$Name)
 cultInstructors <- length(unique(cultData$Instructor))
 cultCourses <- length(unique(cultData$Course))
@@ -117,8 +69,7 @@ cultSections <- length(unique(cultData$CRN))
 cultStudents <- length(unique(cultData$Name))
 
 #---> DIVG
-divgData <- myData %>% 
-	filter(DIVG == 1)
+divgData <- read_csv("../output/data/divgData.csv")
 divgRecords <- length(divgData$Name)
 divgInstructors <- length(unique(divgData$Instructor))
 divgCourses <- length(unique(divgData$Course))
@@ -126,8 +77,7 @@ divgSections <- length(unique(divgData$CRN))
 divgStudents <- length(unique(divgData$Name))
 
 #---> DIVU
-divuData <- myData %>% 
-	filter(DIVU == 1)
+divuData <- read_csv("../output/data/divuData.csv")
 divuRecords <- length(divuData$Name)
 divuInstructors <- length(unique(divuData$Instructor))
 divuCourses <- length(unique(divuData$Course))
@@ -135,8 +85,7 @@ divuSections <- length(unique(divuData$CRN))
 divuStudents <- length(unique(divuData$Name))
 
 #---> NSCI
-nsciData <- myData %>% 
-	filter(NSCL == 1 | NSCI == 1)
+nsciData <- read_csv("../output/data/nsciData.csv")
 nsciRecords <- length(nsciData$Name)
 nsciInstructors <- length(unique(nsciData$Instructor))
 nsciCourses <- length(unique(nsciData$Course))
@@ -144,8 +93,7 @@ nsciSections <- length(unique(nsciData$CRN))
 nsciStudents <- length(unique(nsciData$Name))
 
 #---> PROB
-probData <- myData %>% 
-	filter(PROB == 1)
+probData <- read_csv("../output/data/probData.csv")
 probRecords <- length(probData$Name)
 probInstructors <- length(unique(probData$Instructor))
 probCourses <- length(unique(probData$Course))
@@ -153,8 +101,7 @@ probSections <- length(unique(probData$CRN))
 probStudents <- length(unique(probData$Name))
 
 #---> QUAN
-quanData <- myData %>% 
-	filter(QUAL == 1)
+quanData <- read_csv("../output/data/quanData.csv")
 quanRecords <- length(quanData$Name)
 quanInstructors <- length(unique(quanData$Instructor))
 quanCourses <- length(unique(quanData$Course))
@@ -162,8 +109,7 @@ quanSections <- length(unique(quanData$CRN))
 quanStudents <- length(unique(quanData$Name))
 
 #---> SSOC
-ssocData <- myData %>% 
-	filter(SSOC == 1 | SSOF == 1)
+ssocData <- read_csv("../output/data/ssocData.csv")
 ssocRecords <- length(ssocData$Name)
 ssocInstructors <- length(unique(ssocData$Instructor))
 ssocCourses <- length(unique(ssocData$Course))
@@ -187,7 +133,7 @@ summaryTable <- summaryTable %>%
 write_csv(summaryTable, "../output/data/reportTable.csv")
 ```
 
-The General Education instructional dataset for the `r theSemester` semester of `r theYear` included a total of `r comma(length(myData$CRN),format="d")` student records. This represented `r comma(length(unique(myData$Course)),format="d")` courses which were delivered in `r comma(length(unique(myData$CRN)),format="d")` total sections. These classes were taught by `r comma(length(unique(myData$Instructor)),format="d")` different instructors. Some students were enrolled in more than one General Education course for a particular competency. Therefore, there were fewer unique students (`r comma(length(unique(myData$Name)),format="d")`) than records. In addition, some courses count for more than one of the General Education core competencies (double- or triple-dippers). Because of this, there are more total values (when adding up all the competencies) than the original dataset actually contained. Here is a brief breakdown of the records for this semester.
+The General Education instructional dataset for the `r ssocData$Semester[1]` semester of `r ssocData$Year[1]` included a total of `r comma(summaryTable[11,6],format="d")` student records. This represented `r comma(summaryTable[11,2],format="d")` courses which were delivered in `r comma(summaryTable[11,3],format="d")` total sections. These classes were taught by `r comma(summaryTable[11,4],format="d")` different instructors. Some students were enrolled in more than one General Education course for a particular competency. Therefore, there were fewer unique students than records. In addition, some courses count for more than one of the General Education core competencies (double- or triple-dippers). Because of this, there are more total values (when adding up all the competencies) than the original dataset actually contained. Here is a brief breakdown of the records for this semester.
 
 ```{r table, echo=FALSE}
 ## PUT THE TIBBLE IN THE DOCUMENT AS A TABLE
