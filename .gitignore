@@ -42,9 +42,11 @@ vignettes/*.pdf
 rawdata/*
 !rawdata/.gitkeep
 
-
 # the output files also contain FERPA data
 output/data/*
 !output/data/.gitkeep
 output/workbooks/*
 !output/workbooks/.gitkeep
+
+# the output files are not needed for the scripts
+src/*.Rout
