@@ -1,7 +1,7 @@
 ---
 title: "Assessment Project Help"
 author: "Dr. Clifton Franklund"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: html_document
 ---
 ```{r setup, include=FALSE}
@@ -11,3 +11,22 @@ knitr::opts_chunk$set(echo = FALSE)
 ### Background ###  
 
 This is an R Markdown help document.
+
+### File Structure ###
+```.
+├── GenEdAssessment.Rproj
+├── LICENSE
+├── README.md
+├── makefile
+├── output
+│   ├── data
+│   ├── documents
+│   └── workbooks
+├── rawdata
+└── src
+    ├── cleanData.R
+    ├── makeHelp.Rmd
+    ├── makeReport.Rmd
+    ├── makeSpreadsheets.R
+    └── sendEmails.R
+```
