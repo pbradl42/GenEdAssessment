@@ -1,41 +1,13 @@
 ---
 title: "Assessment Project Help"
 author: "Dr. Clifton Franklund"
-date: "5/2/2020"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library(DiagrammeR)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## R Markdown ##  
+### Background ###  
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r flow, echo=FALSE, warning=FALSE,message=FALSE}
-grViz("digraph {
-
-graph [layout = dot, rankdir = TB]
-
-# define the global styles of the nodes. We can override these in box if we wish
-node [shape = rectangle, style = filled, fillcolor = Linen]
-
-makehelp [label = 'src/makeHelp.R', shape = parallelogram]
-help [label = 'output/help.html']
-rawdata [label = 'rawdata/toyData.xlsx', shape = cylinder, fillcolor = Beige]
-cleanR [label =  'src/cleanData.R', shape = parallelogram]
-cleandata [label = 'output/data/cleanData.csv']
-workbooksR [label = 'src/makeWorkbooks.R', shape = parallelogram]
-workbooks [label = 'Excel workbooks']
-datasubsets [label = 'Data subsets']
-emailsR [label = 'src/sendEmails.R', shape = parallelogram]
-
-# edge definitions with the node IDs
-makehelp -> help
-rawdata  -> cleanR -> cleandata -> {workbooksR, emailsR} -> {workbooks, datasubsets}
-}")
-```
-
+This is an R Markdown help document.
