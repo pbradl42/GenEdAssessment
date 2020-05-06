@@ -10,6 +10,10 @@ always_allow_html: yes
 ---
 
 ```{r libraries, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, results=FALSE}
+######################################################################
+## THIS SCRIPT READS THE RAW DATAFILE AND GENERATES SUMMARY REPORTS ##
+######################################################################
+
 ## READ IN THE LIBRARIES THAT WE NEED
 library(tidyverse)
 library(readxl)
