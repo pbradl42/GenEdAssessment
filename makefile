@@ -49,6 +49,7 @@ $(DAT)/cleanData.csv: $(SRC)/cleanData.R $(RAW)/202001_Gen_Ed_Attribute_Courses_
 clean:
 	@rm -f $(REP)/report.*
 	@rm -f $(REP)/help.html
+	@rm -f $(SRC)/*.Rout
 	@rm -f $(DAT)/*.csv
 	@rm -rf $(WKB)/*
 
