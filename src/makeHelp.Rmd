@@ -21,15 +21,21 @@ To ensure maximal reproducibility, the amount of manual configuration needed bet
 1. Save - that is all!! You are now ready to proceed.
 
 ### Running makefile Commands ###
+To further simplify and automate this process, the assessment workbooks are generated and emailed using a Gnu makefile. Makefiles only run scripts when they are needed (i.e. after one or more of their dependencies have been altered). The make file for this project currently has six targets. You can run them from the command line (within the `GenEdAssessment` directory) using the following commands.
 
-**`make`** - default  
-**`make help`** - default  
-**`make reports`** - generates  
-**`make workbooks`** - creates  
-**`make emails`** - composes  
-**`make clean`** - erases the contents  
-**`make all`** - still thinking about this...
+**`make`** - Just typing `make` will execute the recipe for the default target. In this project, the default target generates this help file as an html document (`output/documents/help.html`) and opens it in the default web browser.  
 
+**`make help`** - This explicitly calls the default target recipe (same as just `make`).  
+
+**`make reports`** - This target calls `src/makeReports.R` and creates summary reports for the raw data file. These reports (`output/documents/report.html`, `output/documents/report.pdf`, and `output/documents/report.docx`) are each opened in their default applications.  
+
+**`make workbooks`** -   This target calls `src/cleanData.R` and `src/makeSpreadsheets.R` to create all of the Excel data workbooks. These are stored in subdirectories by core competency under `output/workbooks/`.  
+
+**`make emails`** - This target calls `src/cleanData.R` and `src/sendEmails.R` to compose and send emails (one per each unique CRN) to instructors. The workbooks generated above are included as attachments. This process uses the Google Gmail API for bulk emailing via `R`.  
+
+**`make test`** - This target generates workbooks and sends emails using a small test dataset. This is for troubleshooting and test purposes only.  
+
+**`make clean`** - This target erases _all_ of the contents of the temporary directories (`output/data`, `output/documents`, and `output/workbooks`). That allows you to generate new files again by using the commands above.  
 
 ### File Structure ###
 ```R
