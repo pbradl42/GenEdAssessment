@@ -46,6 +46,9 @@ workbooks: $(DAT)/logFile.csv
 $(DAT)/cleanData.csv: $(SRC)/cleanData.R $(RAW)/202001_Gen_Ed_Attribute_Courses_and_Rosters-with_Course_Coll_Codes-20200423.xlsx
 	@cd $(SRC); R CMD BATCH cleanData.R
 
+test:
+	@cd $(SRC); R CMD BATCH testing.R
+
 clean:
 	@rm -f $(REP)/report.*
 	@rm -f $(REP)/help.html
