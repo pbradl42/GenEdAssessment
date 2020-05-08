@@ -10,6 +10,9 @@ library(readr)
 ## SET UP GMAIL API 0AUTH CREDENTIALS
 gm_auth_configure(path="../rawdata/SendMailProject.json")
 
+## ASSIGNMENT DUE DATE
+dueDate <- "September 3, 2020"
+
 ## READ IN THE CLEANED COMPETENCY DATA
 collData <- read_csv("../output/data/collData.csv")
 comsData <- read_csv("../output/data/comsData.csv")
@@ -103,7 +106,6 @@ testList <- read_xlsx("../rawdata/Test_Dataset.xlsx")
 this_hw <- "Testing"
 email_sender <- 'Clifton Franklund <cliftonfranklund@ferris.edu>'
 body <- "<p>Greetings,</p>
-<p>This email was generated as a demonstration of the R script's function during our University General Education meeting. <strong>You may disregard this message.</strong><p>
 
 <p>It is once again time to submit General Education assessment data. This semester, we are using a new streamlined process to simplify your reporting experience. You will get one of these emails for every combination of General Education course section and competency that you teach. Sorry for all the emails; it is easier to keep track of everything this way.</p>
 
@@ -117,7 +119,7 @@ body <- "<p>Greetings,</p>
     <li><strong>Video 2:</strong> How to submit your completed Excel workbook</li>
 </ul>
 
-<strong>Completed workbooks should be submitted to the SharePoint site by: DUE DATE HERE.</strong>
+<strong>Completed workbooks should be submitted to the SharePoint site by: %s.</strong>
 
 <hr>
 
@@ -172,7 +174,7 @@ composedEmails <- emailList %>%
 		To = sprintf('%s <%s>', Full.Name, Email),
 		From = email_sender,
 		Subject = sprintf('Reporting General Education %s assessment results for %s section %s, %s %s', Outcome, Course, Section, Semester, Year),
-		Body = sprintf(body),
+		Body = sprintf(body,dueDate),
 		Attachment = Attachment) %>%
 	select(To, From, Subject, Body, Attachment)
 write_csv(composedEmails, "../output/data/composed_emails.csv")
