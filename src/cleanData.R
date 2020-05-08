@@ -7,7 +7,7 @@ library(xlsx)
 library(knitr)
 
 ## SET THE VARIABLES FOR THE ASSESSMENT PERIOD HERE (DATAFILE AND OUTCOME NUMBER)
-rawData <- "../rawdata/202001_Gen_Ed_Attribute_Courses_and_Rosters-with_Course_Coll_Codes-20200423.xlsx"
+rawData <- "../rawdata/202001_GenEd-Data_Rec-20200423.xlsx"
 outcomeNumber <- "1"
 
 
