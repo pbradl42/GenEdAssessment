@@ -4,102 +4,23 @@ library(readxl)
 library(writexl)
 library(knitr)
 library(gmailr)
-library(purr)
+library(purrr)
 library(readr)
 
-gm_auth_configure(path="_data/SendMailProject.json")
-##--> Prime the pump
-#prime <- gm_mime() %>%
-#	gm_to("cliftonfranklund@ferris.edu") %>%
-#	gm_from("cliftonfranklund@ferris.edu") %>%
-#	gm_subject("Test email subject") %>%
-#	gm_text_body("Test email body")
-#gm_send_message(prime)
+## SET UP GMAIL API 0AUTH CREDENTIALS
+gm_auth_configure(path="../rawdata/SendMailProject.json")
 
-## SET THE VARIABLES FOR THE ASSESSMENT PERIOD HERE
-theYear <- "2020"
-theSemester <- "Spring"
-collVar <- "COL1"
-comsVar <- "COMS1"
-comwVar <- "COMW1"
-cultVar <- "CUL1"
-divgVar <- "DIVG1"
-divuVar <- "DIVU1"
-nsciVar <- "SCI1"
-probVar <- "PRB1"
-quanVar <- "QNT1"
-ssocVar <- "SOC1"
-
-
-## READ IN THE DATA AND FORMAT IT
-myData <- read_xlsx("./_data/202001-GenEd-Data.xlsx")
-
-##---> Rename variables
-myData <- myData %>%  rename(Term=TERM,
-							 CRN=CRN,
-							 College=COURSE_COLL_CODE,
-							 Prefix=SUBJ,
-							 Number=CRSE_NUMB,
-							 Section=SECTION,
-							 ID=ID,
-							 Name=STU_NAME,
-							 Instructor=INSTR_NAME,
-							 Email=INSTR_EMAIL)
-
-##--> Recode colleges
-myData[myData$College=="AS","College"] <- "CAS"
-myData[myData$College=="BU","College"] <- "COB"
-myData[myData$College=="ED","College"] <- "COEHS"
-myData[myData$College=="TE","College"] <- "CET"
-myData[myData$College=="HP","College"] <- "CHP"
-myData[myData$College=="UN","College"] <- "UNIV"
-
-##--> Add variables
-myData$Course <- paste0(myData$Prefix,myData$Number)
-myData <- myData %>% separate(Instructor,c("Instructor.Last","Instructor.First"), ",", remove=FALSE)
-myData$Full.Name <- paste(myData$Instructor.First,myData$Instructor.Last)
-
-
-## SPLIT OUT DATA BY COMPETENCY
-##--> COLL
-collData <- myData %>%
-	filter(COLL == 1)
-
-##--> COMS
-comsData <- myData %>%
-	filter(COMS == 1)
-
-##--> COMW
-comwData <- myData %>%
-	filter(COMW == 1)
-
-##--> CULT
-cultData <- myData %>%
-	filter(!is.na(ACTC) | !is.na(CATC) | !is.na(CLTR))
-
-##--> DIVG
-divgData <- myData %>%
-	filter(DIVG == 1)
-
-##--> DIVU
-divuData <- myData %>%
-	filter(DIVU == 1)
-
-##--> NSCI
-nsciData <- myData %>%
-	filter(NSCL == 1 | NSCI == 1)
-
-##--> PROB
-probData <- myData %>%
-	filter(PROB == 1)
-
-##--> QUAN
-quanData <- myData %>%
-	filter(QUAL == 1)
-
-##--> SSOC
-ssocData <- myData %>%
-	filter(SSOC == 1 | SSOF == 1)
+## READ IN THE CLEANED COMPETENCY DATA
+collData <- read_csv("../output/data/collData.csv")
+comsData <- read_csv("../output/data/comsData.csv")
+comwData <- read_csv("../output/data/comwData.csv")
+cultData <- read_csv("../output/data/cultData.csv")
+divgData <- read_csv("../output/data/divgData.csv")
+divuData <- read_csv("../output/data/divuData.csv")
+nsciData <- read_csv("../output/data/nsciData.csv")
+probData <- read_csv("../output/data/probData.csv")
+quanData <- read_csv("../output/data/quanData.csv")
+ssocData <- read_csv("../output/data/ssocData.csv")
 
 
 ## MAKE LISTS OF RECIPIENTS FOR EACH COMPETENCY
@@ -107,67 +28,79 @@ ssocData <- myData %>%
 collList <- collData %>%
 	select(-Name, -ID) %>%
 	unique()
-collList$Attachment <- paste0("./COLL/",collList$Instructor.Last,"-",collList$College,"-",collList$Course,"-",collList$Section,"-",collVar,".xlsx")
+collList$Attachment <- paste0("../output/workbooks/COLL/",collList$Instructor.Last,"-",collList$College,"-",collList$Course,"-",collList$Section,"-",collVar,".xlsx")
+collList$Full.Name <- paste(collList$Instructor.First,collList$Instructor.Last)
 
 ## --> COMS
 comsList <- comsData %>%
 	select(-Name, -ID) %>%
 	unique()
-comsList$Attachment <- paste0("./COMS/",comsList$Instructor.Last,"-",comsList$College,"-",comsList$Course,"-",comsList$Section,"-",comsVar,".xlsx")
+comsList$Attachment <- paste0("../output/workbooks/COMS/",comsList$Instructor.Last,"-",comsList$College,"-",comsList$Course,"-",comsList$Section,"-",comsVar,".xlsx")
+comsList$Full.Name <- paste(comsList$Instructor.First,comsList$Instructor.Last)
 
 ## --> COMW
 comwList <- comwData %>%
 	select(-Name, -ID) %>%
 	unique()
-comwList$Attachment <- paste0("./COMW/",comwList$Instructor.Last,"-",comwList$College,"-",comwList$Course,"-",comwList$Section,"-",comwVar,".xlsx")
+comwList$Attachment <- paste0("../output/workbooks/COMW/",comwList$Instructor.Last,"-",comwList$College,"-",comwList$Course,"-",comwList$Section,"-",comwVar,".xlsx")
+comwList$Full.Name <- paste(comwList$Instructor.First,comwList$Instructor.Last)
 
 ## --> CULT
 cultList <- cultData %>%
 	select(-Name, -ID) %>%
 	unique()
-cultList$Attachment <- paste0("./CULT/",cultList$Instructor.Last,"-",cultList$College,"-",cultList$Course,"-",cultList$Section,"-",cultVar,".xlsx")
+cultList$Attachment <- paste0("../output/workbooks/CULT/",cultList$Instructor.Last,"-",cultList$College,"-",cultList$Course,"-",cultList$Section,"-",cultVar,".xlsx")
+cultList$Full.Name <- paste(cultList$Instructor.First,cultList$Instructor.Last)
 
 ## --> DIVG
 divgList <- divgData %>%
 	select(-Name, -ID) %>%
 	unique()
-divgList$Attachment <- paste0("./DIVG/",divgList$Instructor.Last,"-",divgList$College,"-",divgList$Course,"-",divgList$Section,"-",divgVar,".xlsx")
+divgList$Attachment <- paste0("../output/workbooks/DIVG/",divgList$Instructor.Last,"-",divgList$College,"-",divgList$Course,"-",divgList$Section,"-",divgVar,".xlsx")
+divgList$Full.Name <- paste(divgList$Instructor.First,divgList$Instructor.Last)
 
 ## --> DIVU
 divuList <- divuData %>%
 	select(-Name, -ID) %>%
 	unique()
-divuList$Attachment <- paste0("./DIVU/",divuList$Instructor.Last,"-",divuList$College,"-",divuList$Course,"-",divuList$Section,"-",divuVar,".xlsx")
+divuList$Attachment <- paste0("../output/workbooks/DIVU/",divuList$Instructor.Last,"-",divuList$College,"-",divuList$Course,"-",divuList$Section,"-",divuVar,".xlsx")
+divuList$Full.Name <- paste(divuList$Instructor.First,divuList$Instructor.Last)
 
 ## --> NSCI
 nsciList <- nsciData %>%
 	select(-Name, -ID) %>%
 	unique()
-nsciList$Attachment <- paste0("./NSCI/",nsciList$Instructor.Last,"-",nsciList$College,"-",nsciList$Course,"-",nsciList$Section,"-",nsciVar,".xlsx")
+nsciList$Attachment <- paste0("../output/workbooks/NSCI/",nsciList$Instructor.Last,"-",nsciList$College,"-",nsciList$Course,"-",nsciList$Section,"-",nsciVar,".xlsx")
+nsciList$Full.Name <- paste(nsciList$Instructor.First,nsciList$Instructor.Last)
 
 ## --> PROB
 probList <- probData %>%
 	select(-Name, -ID) %>%
 	unique()
-probList$Attachment <- paste0("./PROB/",probList$Instructor.Last,"-",probList$College,"-",probList$Course,"-",probList$Section,"-",probVar,".xlsx")
+probList$Attachment <- paste0("../output/workbooks/PROB/",probList$Instructor.Last,"-",probList$College,"-",probList$Course,"-",probList$Section,"-",probVar,".xlsx")
+probList$Full.Name <- paste(probList$Instructor.First,probList$Instructor.Last)
 
 ## --> QUAN
 quanList <- quanData %>%
 	select(-Name, -ID) %>%
 	unique()
-quanList$Attachment <- paste0("./QUAN/",quanList$Instructor.Last,"-",quanList$College,"-",quanList$Course,"-",quanList$Section,"-",quanVar,".xlsx")
+quanList$Attachment <- paste0("../output/workbooks/QUAN/",quanList$Instructor.Last,"-",quanList$College,"-",quanList$Course,"-",quanList$Section,"-",quanVar,".xlsx")
+quanList$Full.Name <- paste(quanList$Instructor.First,quanList$Instructor.Last)
 
 ## --> SSOC
 ssocList <- ssocData %>%
 	select(-Name, -ID) %>%
 	unique()
-ssocList$Attachment <- paste0("./SSOC/",ssocList$Instructor.Last,"-",ssocList$College,"-",ssocList$Course,"-",ssocList$Section,"-",ssocVar,".xlsx")
+ssocList$Attachment <- paste0("../output/workbooks/SSOC/",ssocList$Instructor.Last,"-",ssocList$College,"-",ssocList$Course,"-",ssocList$Section,"-",ssocVar,".xlsx")
+ssocList$Full.Name <- paste(ssocList$Instructor.First,ssocList$Instructor.Last)
 
+emailList <- rbind(collList, comsList, comwList, cultList, divgList, divuList, nsciList, probList, quanList, ssocList)
+write_csv(emailList, "../output/data/emailListData.csv")
 
 ## SET UP AND SEND EMAILS BY COMPETENCY
 ##--> Set up composed emails in a dataframe
-testList <- read_xlsx("_data/testList2.xlsx")
-this_hw <- "Demonstration"
+testList <- read_xlsx("../rawdata/Test_Dataset.xlsx")
+this_hw <- "Testing"
 email_sender <- 'Clifton Franklund <cliftonfranklund@ferris.edu>'
 body <- "<p>Greetings,</p>
 <p>This email was generated as a demonstration of the R script's function during our University General Education meeting. <strong>You may disregard this message.</strong><p>
@@ -233,25 +166,22 @@ prepare_and_send <- function(sender, recepient,
 		gm_send_message()
 }
 
-##--> Send a single test email
-#prepare_and_send("franklc@ferris.edu","frankc@ferris.edu","Test","This is a test.","./TEST/Franklund-CAS-FAKE101-001-TEST1.xlsx")
-
 ##--> Send a small batch of test emails
-composedEmails <- testList %>%
+composedEmails <- emailList %>%
 	mutate(
 		To = sprintf('%s <%s>', Full.Name, Email),
 		From = email_sender,
-		Subject = sprintf('Reporting General Education TST1 assessment results for %s section %s, %s %s', Course, Section, theSemester, theYear),
+		Subject = sprintf('Reporting General Education %s assessment results for %s section %s, %s %s', Outcome, Course, Section, Semester, Year),
 		Body = sprintf(body),
 		Attachment = Attachment) %>%
 	select(To, From, Subject, Body, Attachment)
-write_csv(composedEmails, "_data/composed_emails.csv")
+write_csv(composedEmails, "../output/data/composed_emails.csv")
 
 sent_mail <- composedEmails %>%
 	mutate(x = pmap(list(To, From, Subject, Body, Attachment),safely(prepare_and_send)))
 
 saveRDS(sent_mail,
-		paste0("_data/",gsub("\\s+", "_", this_hw), "-sent-emails.rds"))
+		paste0("../output/data/",gsub("\\s+", "_", this_hw), "-sent-emails.rds"))
 
 errors <- sent_mail$x %>%
 	transpose() %>%

@@ -68,7 +68,7 @@ for (i in 1:as.numeric(length(listCRN))){
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
 }
-logFile <- tibble("Competency"="COLL","Number"=length(unique(collData$CRN)))
+logFile <- tibble("Competency"="COLL","Workbooks"=length(list.files("../output/workbooks/COLL")))
 
 #--> COMS
 comsData <- read_csv("../output/data/comsData.csv")
@@ -82,7 +82,7 @@ for (i in 1:as.numeric(length(listCRN))){
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
 }
-comsLog <- c("COMS", length(unique(comsData$CRN)))
+comsLog <- c("COMS", length(list.files("../output/workbooks/COMS")))
 logFile <- rbind(logFile, comsLog)
 
 #--> COMW
@@ -97,7 +97,7 @@ for (i in 1:as.numeric(length(listCRN))){
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
 }
-comwLog <- c("COMW", length(unique(comwData$CRN)))
+comwLog <- c("COMW", length(list.files("../output/workbooks/COMW")))
 logFile <- rbind(logFile, comwLog)
 
 #--> CULT
@@ -112,7 +112,7 @@ for (i in 1:as.numeric(length(listCRN))){
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
 }
-cultLog <- c("CULT", length(unique(cultData$CRN)))
+cultLog <- c("CULT", length(list.files("../output/workbooks/CULT")))
 logFile <- rbind(logFile, cultLog)
 
 #--> DIVG
@@ -127,7 +127,7 @@ for (i in 1:as.numeric(length(listCRN))){
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
 }
-divgLog <- c("DIVG", length(unique(divgData$CRN)))
+divgLog <- c("DIVG", length(list.files("../output/workbooks/DIVG")))
 logFile <- rbind(logFile, divgLog)
 
 #--> DIVU
@@ -142,7 +142,7 @@ for (i in 1:as.numeric(length(listCRN))){
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
 }
-divuLog <- c("DIVU", length(unique(divuData$CRN)))
+divuLog <- c("DIVU", length(list.files("../output/workbooks/DIVU")))
 logFile <- rbind(logFile, divuLog)
 
 #--> NSCI
@@ -157,7 +157,7 @@ for (i in 1:as.numeric(length(listCRN))){
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
 }
-nsciLog <- c("NSCI", length(unique(nsciData$CRN)))
+nsciLog <- c("NSCI", length(list.files("../output/workbooks/NSCI")))
 logFile <- rbind(logFile, nsciLog)
 
 #--> PROB
@@ -172,7 +172,7 @@ for (i in 1:as.numeric(length(listCRN))){
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
 }
-probLog <- c("PROB", length(unique(probData$CRN)))
+probLog <- c("PROB", length(list.files("../output/workbooks/PROB")))
 logFile <- rbind(logFile, probLog)
 
 #--> QUAN
@@ -187,7 +187,7 @@ for (i in 1:as.numeric(length(listCRN))){
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
 }
-quanLog <- c("QUAN", length(unique(quanData$CRN)))
+quanLog <- c("QUAN", length(list.files("../output/workbooks/QUAN")))
 logFile <- rbind(logFile, quanLog)
 
 #--> SSOC
@@ -202,7 +202,7 @@ for (i in 1:as.numeric(length(listCRN))){
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
 }
-ssocLog <- c("SSOC", length(unique(ssocData$CRN)))
+ssocLog <- c("SSOC", length(list.files("../output/workbooks/SSOC")))
 logFile <- rbind(logFile, ssocLog)
 
 write_csv(logFile,"../output/data/logFile.csv")

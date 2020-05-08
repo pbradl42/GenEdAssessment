@@ -35,8 +35,8 @@ $(REP)/report.pdf: $(SRC)/makeReport.Rmd $(DAT)/cleanData.csv $(RAW)/202001_Gen_
 $(REP)/report.docx: $(SRC)/makeReport.Rmd $(DAT)/cleanData.csv $(RAW)/202001_Gen_Ed_Attribute_Courses_and_Rosters-with_Course_Coll_Codes-20200423.xlsx
 	@cd $(SRC); Rscript -e "rmarkdown::render('makeReport.Rmd', output_format = c('word_document'), quiet = TRUE, output_file = '../$(REP)/report.docx')" > /dev/null 2>&1
 
-emails:
-	Rscript
+emails: $(DAT)/logFile.csv $(SRC)/sendEmails.R
+	@cd $(SRC); R CMD BATCH sendEmails.R
 
 $(DAT)/logFile.csv: $(SRC)/makeSpreadsheets.R $(DAT)/cleanData.csv
 	@cd $(SRC); R CMD BATCH makeSpreadsheets.R
@@ -54,6 +54,7 @@ clean:
 	@rm -f $(REP)/help.html
 	@rm -f $(SRC)/*.Rout
 	@rm -f $(DAT)/*.csv
+	@rm -f $(DAT)/*.rds
 	@rm -rf $(WKB)/*
 
 

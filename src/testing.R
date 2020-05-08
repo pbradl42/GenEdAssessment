@@ -116,7 +116,7 @@ for (i in 1:as.numeric(length(listCRN))){
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
 }
 testLog <- c("TEST", length(unique(testData$CRN)))
-
+logFile <- tibble(Outcome="TEST",Workbooks=length(list.files("../output/workbooks/TEST")))
 write_csv(logFile,"../output/data/logFile.csv")
 
 
