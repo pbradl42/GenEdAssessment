@@ -5,18 +5,19 @@ This project was created to facilitate a new assessment process for the General 
 To ensure maximal reproducibility, the amount of manual configuration needed between different data runs has been minimized. There are really only a few things that you need to do.  
 
 1. Place the new raw data file in the `rawdata` directory.  
-1. Add instructor information to the Test_Dataset and place the file in `rawdata`
+1. Add instructor information to `Test_Dataset.xlsx` and place the file in `rawdata`
 1. Set up 0auth for the Gmail API - instructions here: https://blog.mailtrap.io/send-emails-with-gmail-api/
 1. Store credentials json file in `rawdata`.
-1. Open makefile in an editor and change RAWFILE to your file's name.
+1. Open makefile in an editor and change `RAWDATA` to your file's name.
 1. Open `src/cleanData.R` in an editor of your choice (I use the RStudio IDE).  
 1. Change the name of the rawdata file read to the name of the file from step 1 (look for `rawdata <- ""`).
 1. Indicate which outcome is to be assessed for the current semester - 1, 2, 3, or 4 - (look for `outcomeNumber <- ""`).  
 1. Open `src/testing.R` and change hange the name of the rawdata file read to the name of your test file.
-1. Indicate which outcome is to be assessed for the testing run - 1, 2, 3, or 4.
+1. Indicate which outcome is to be assessed for the testing run - 1, 2, 3, or 4 - in `src/testing.R`.
 1. Open `src/sendEmails.R` and change the due date (look for `dueDate <-`).
 1. Change `gm_auth_configure` to point to your credential file.
-1. Save - that is all!! You are now ready to proceed.
+1. Save - that is all!! You are now ready to proceed. Try running `make reports` and `make test` first. With those sorted out, you should be able to `make clean` and then `make workbooks` and `make emails` with your main raw data.
+
 ### Running makefile Commands ###
 To further simplify and automate this process, the assessment workbooks are generated and emailed using a Gnu makefile. Makefiles only run scripts when they are needed (i.e. after one or more of their dependencies have been altered). The make file for this project currently has six targets. You can run them from the command line (within the `GenEdAssessment` directory) using the following commands.
 
