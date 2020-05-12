@@ -9,7 +9,7 @@ library(gmailr)
 
 ## SET THE VARIABLES FOR THE ASSESSMENT PERIOD HERE (DATAFILE AND OUTCOME NUMBER)
 rawData <- "../rawdata/Test_Dataset.xlsx"
-outcomeNumber <- "1"
+outcomeNumber <- "4"
 dueDate <- "September 3, 2020"
 
 
