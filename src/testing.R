@@ -169,6 +169,7 @@ body <- "<p>Greetings,</p>
     	<li>Provide a one or two sentence description of your assignment.</li>
     	<li>Provide a one or two sentence reflection upon your students’ performance on the assignment. Were the scores unusually high or low? Were the results typical?</li>
     	<li>Put an X next to the standard measure that best describes your assignment. Definitions of these can be found at https://www.ferris.edu/HTMLS/academics/general-education/evidence/measures.htm</li>
+    	    	<li>Put an X next to the standard pedagogy that was used to deliver this assignment. Definitions of these can be found at https://www.ferris.edu/HTMLS/academics/general-education/evidence/pedagogies.htm</li>
     	<li>Put an X next to the action that best describes your intention moving forward in this course.</li>
     </ol>
   	<li>Completing “Sheet 2”</li>
@@ -180,7 +181,7 @@ body <- "<p>Greetings,</p>
   	<li>Submitting your completed workbook</li>
   	<ol type='A'>
   		<li>Log into General Education Data SharePoint site using the link given above.</li>
-    	<li>In “Documents” open the folder for the correct academic term.</li>
+    	<li>Under “Submitted Workbooks” open the folder for the correct academic term.</li>
     	<li>Open the folder for the core competency that you assessed.</li>
     	<li>Drag and drop your file into that folder</li>
     </ol>
