@@ -31,70 +31,70 @@ ssocData <- read_csv("../output/data/ssocData.csv")
 collList <- collData %>%
 	select(-Name, -ID) %>%
 	unique()
-collList$Attachment <- paste0("../output/workbooks/COLL/",collList$Instructor.Last,"-",collList$College,"-",collList$Course,"-",collList$Section,"-",collVar,".xlsx")
+collList$Attachment <- paste0("../output/workbooks/COLL/",collList$Semester,"-",collList$Year,"-",collList$Instructor.Last,"-",collList$College,"-",collList$Course,"-",collList$Section,"-",collVar,".xlsx")
 collList$Full.Name <- paste(collList$Instructor.First,collList$Instructor.Last)
 
 ## --> COMS
 comsList <- comsData %>%
 	select(-Name, -ID) %>%
 	unique()
-comsList$Attachment <- paste0("../output/workbooks/COMS/",comsList$Instructor.Last,"-",comsList$College,"-",comsList$Course,"-",comsList$Section,"-",comsVar,".xlsx")
+comsList$Attachment <- paste0("../output/workbooks/COMS/",comsList$Semester,"-",comsList$Year,"-",comsList$Instructor.Last,"-",comsList$College,"-",comsList$Course,"-",comsList$Section,"-",comsVar,".xlsx")
 comsList$Full.Name <- paste(comsList$Instructor.First,comsList$Instructor.Last)
 
 ## --> COMW
 comwList <- comwData %>%
 	select(-Name, -ID) %>%
 	unique()
-comwList$Attachment <- paste0("../output/workbooks/COMW/",comwList$Instructor.Last,"-",comwList$College,"-",comwList$Course,"-",comwList$Section,"-",comwVar,".xlsx")
+comwList$Attachment <- paste0("../output/workbooks/COMW/",comwList$Semester,"-",comwList$Year,"-",comwList$Instructor.Last,"-",comwList$College,"-",comwList$Course,"-",comwList$Section,"-",comwVar,".xlsx")
 comwList$Full.Name <- paste(comwList$Instructor.First,comwList$Instructor.Last)
 
 ## --> CULT
 cultList <- cultData %>%
 	select(-Name, -ID) %>%
 	unique()
-cultList$Attachment <- paste0("../output/workbooks/CULT/",cultList$Instructor.Last,"-",cultList$College,"-",cultList$Course,"-",cultList$Section,"-",cultVar,".xlsx")
+cultList$Attachment <- paste0("../output/workbooks/CULT/",cultList$Semester,"-",cultList$Year,"-",cultList$Instructor.Last,"-",cultList$College,"-",cultList$Course,"-",cultList$Section,"-",cultVar,".xlsx")
 cultList$Full.Name <- paste(cultList$Instructor.First,cultList$Instructor.Last)
 
 ## --> DIVG
 divgList <- divgData %>%
 	select(-Name, -ID) %>%
 	unique()
-divgList$Attachment <- paste0("../output/workbooks/DIVG/",divgList$Instructor.Last,"-",divgList$College,"-",divgList$Course,"-",divgList$Section,"-",divgVar,".xlsx")
+divgList$Attachment <- paste0("../output/workbooks/DIVG/",divgList$Semester,"-",divgList$Year,"-",divgList$Instructor.Last,"-",divgList$College,"-",divgList$Course,"-",divgList$Section,"-",divgVar,".xlsx")
 divgList$Full.Name <- paste(divgList$Instructor.First,divgList$Instructor.Last)
 
 ## --> DIVU
 divuList <- divuData %>%
 	select(-Name, -ID) %>%
 	unique()
-divuList$Attachment <- paste0("../output/workbooks/DIVU/",divuList$Instructor.Last,"-",divuList$College,"-",divuList$Course,"-",divuList$Section,"-",divuVar,".xlsx")
+divuList$Attachment <- paste0("../output/workbooks/DIVU/",divuList$Semester,"-",divuList$Year,"-",divuList$Instructor.Last,"-",divuList$College,"-",divuList$Course,"-",divuList$Section,"-",divuVar,".xlsx")
 divuList$Full.Name <- paste(divuList$Instructor.First,divuList$Instructor.Last)
 
 ## --> NSCI
 nsciList <- nsciData %>%
 	select(-Name, -ID) %>%
 	unique()
-nsciList$Attachment <- paste0("../output/workbooks/NSCI/",nsciList$Instructor.Last,"-",nsciList$College,"-",nsciList$Course,"-",nsciList$Section,"-",nsciVar,".xlsx")
+nsciList$Attachment <- paste0("../output/workbooks/NSCI/",nsciList$Semester,"-",nsciList$Year,"-",nsciList$Instructor.Last,"-",nsciList$College,"-",nsciList$Course,"-",nsciList$Section,"-",nsciVar,".xlsx")
 nsciList$Full.Name <- paste(nsciList$Instructor.First,nsciList$Instructor.Last)
 
 ## --> PROB
 probList <- probData %>%
 	select(-Name, -ID) %>%
 	unique()
-probList$Attachment <- paste0("../output/workbooks/PROB/",probList$Instructor.Last,"-",probList$College,"-",probList$Course,"-",probList$Section,"-",probVar,".xlsx")
+probList$Attachment <- paste0("../output/workbooks/PROB/",probList$Semester,"-",probList$Year,"-",probList$Instructor.Last,"-",probList$College,"-",probList$Course,"-",probList$Section,"-",probVar,".xlsx")
 probList$Full.Name <- paste(probList$Instructor.First,probList$Instructor.Last)
 
 ## --> QUAN
 quanList <- quanData %>%
 	select(-Name, -ID) %>%
 	unique()
-quanList$Attachment <- paste0("../output/workbooks/QUAN/",quanList$Instructor.Last,"-",quanList$College,"-",quanList$Course,"-",quanList$Section,"-",quanVar,".xlsx")
+quanList$Attachment <- paste0("../output/workbooks/QUAN/",quanList$Semester,"-",quanList$Year,"-",quanList$Instructor.Last,"-",quanList$College,"-",quanList$Course,"-",quanList$Section,"-",quanVar,".xlsx")
 quanList$Full.Name <- paste(quanList$Instructor.First,quanList$Instructor.Last)
 
 ## --> SSOC
 ssocList <- ssocData %>%
 	select(-Name, -ID) %>%
 	unique()
-ssocList$Attachment <- paste0("../output/workbooks/SSOC/",ssocList$Instructor.Last,"-",ssocList$College,"-",ssocList$Course,"-",ssocList$Section,"-",ssocVar,".xlsx")
+ssocList$Attachment <- paste0("../output/workbooks/SSOC/",ssocList$Semester,"-",ssocList$Year,"-",ssocList$Instructor.Last,"-",ssocList$College,"-",ssocList$Course,"-",ssocList$Section,"-",ssocVar,".xlsx")
 ssocList$Full.Name <- paste(ssocList$Instructor.First,ssocList$Instructor.Last)
 
 emailList <- rbind(collList, comsList, comwList, cultList, divgList, divuList, nsciList, probList, quanList, ssocList)

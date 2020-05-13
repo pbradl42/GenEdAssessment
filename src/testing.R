@@ -110,7 +110,7 @@ listCRN <- unique(testData$CRN)
 files <- NULL
 for (i in 1:as.numeric(length(listCRN))){
 	dataCRN <- testData %>% filter(CRN == listCRN[i])
-	fileName <- paste0("../output/workbooks/TEST/",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",testVar,".xlsx")
+	fileName <- paste0("../output/workbooks/TEST/",dataCRN$Semester,"-",dataCRN$Year,"-",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",testVar,".xlsx")
 	courseData <- tibble(Student.Name=dataCRN$Name,Student.ID=dataCRN$ID,!!as.character(testVar):=NA)
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
@@ -130,7 +130,7 @@ meta.data <- data.frame(Prompts,Responses)
 testList <- testData %>%
 	select(-Name, -ID) %>%
 	unique()
-testList$Attachment <- paste0("../output/workbooks/TEST/",testList$Instructor.Last,"-",testList$College,"-",testList$Course,"-",testList$Section,"-",testVar,".xlsx")
+testList$Attachment <- paste0("../output/workbooks/TEST/",testList$Semester,"-",testList$Year,"-",testList$Instructor.Last,"-",testList$College,"-",testList$Course,"-",testList$Section,"-",testVar,".xlsx")
 testList$Full.Name <- paste(testList$Instructor.First,testList$Instrutor.Last)
 
 

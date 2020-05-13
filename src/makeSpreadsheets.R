@@ -63,7 +63,7 @@ listCRN <- unique(collData$CRN)
 files <- NULL
 for (i in 1:as.numeric(length(listCRN))){
 	dataCRN <- collData %>% filter(CRN == listCRN[i])
-	fileName <- paste0("../output/workbooks/COLL/",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",collVar,".xlsx")
+	fileName <- paste0("../output/workbooks/COLL/",dataCRN$Semester,"-",dataCRN$Year,"-",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",collVar,".xlsx")
 	courseData <- tibble(Student.Name=dataCRN$Name,Student.ID=dataCRN$ID,!!as.character(collVar):=NA)
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
@@ -77,7 +77,7 @@ listCRN <- unique(comsData$CRN)
 files <- NULL
 for (i in 1:as.numeric(length(listCRN))){
 	dataCRN <- comsData %>% filter(CRN == listCRN[i])
-	fileName <- paste0("../output/workbooks/COMS/",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",comsVar,".xlsx")
+	fileName <- paste0("../output/workbooks/COMS/",dataCRN$Semester,"-",dataCRN$Year,"-",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",comsVar,".xlsx")
 	courseData <- tibble(Student.Name=dataCRN$Name,Student.ID=dataCRN$ID,!!as.character(comsVar):=NA)
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
@@ -92,7 +92,7 @@ listCRN <- unique(comwData$CRN)
 files <- NULL
 for (i in 1:as.numeric(length(listCRN))){
 	dataCRN <- comwData %>% filter(CRN == listCRN[i])
-	fileName <- paste0("../output/workbooks/COMW/",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",comwVar,".xlsx")
+	fileName <- paste0("../output/workbooks/COMW/",dataCRN$Semester,"-",dataCRN$Year,"-",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",comwVar,".xlsx")
 	courseData <- tibble(Student.Name=dataCRN$Name,Student.ID=dataCRN$ID,!!as.character(comwVar):=NA)
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
@@ -107,7 +107,7 @@ listCRN <- unique(cultData$CRN)
 files <- NULL
 for (i in 1:as.numeric(length(listCRN))){
 	dataCRN <- cultData %>% filter(CRN == listCRN[i])
-	fileName <- paste0("../output/workbooks/CULT/",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",cultVar,".xlsx")
+	fileName <- paste0("../output/workbooks/CULT/",dataCRN$Semester,"-",dataCRN$Year,"-",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",cultVar,".xlsx")
 	courseData <- tibble(Student.Name=dataCRN$Name,Student.ID=dataCRN$ID,!!as.character(cultVar):=NA)
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
@@ -122,7 +122,7 @@ listCRN <- unique(divgData$CRN)
 files <- NULL
 for (i in 1:as.numeric(length(listCRN))){
 	dataCRN <- divgData %>% filter(CRN == listCRN[i])
-	fileName <- paste0("../output/workbooks/DIVG/",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",divgVar,".xlsx")
+	fileName <- paste0("../output/workbooks/DIVG/",dataCRN$Semester,"-",dataCRN$Year,"-",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",divgVar,".xlsx")
 	courseData <- tibble(Student.Name=dataCRN$Name,Student.ID=dataCRN$ID,!!as.character(divgVar):=NA)
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
@@ -137,7 +137,7 @@ listCRN <- unique(divuData$CRN)
 files <- NULL
 for (i in 1:as.numeric(length(listCRN))){
 	dataCRN <- divuData %>% filter(CRN == listCRN[i])
-	fileName <- paste0("../output/workbooks/DIVU/",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",divuVar,".xlsx")
+	fileName <- paste0("../output/workbooks/DIVU/",dataCRN$Semester,"-",dataCRN$Year,"-",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",divuVar,".xlsx")
 	courseData <- tibble(Student.Name=dataCRN$Name,Student.ID=dataCRN$ID,!!as.character(divuVar):=NA)
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
@@ -152,7 +152,7 @@ listCRN <- unique(nsciData$CRN)
 files <- NULL
 for (i in 1:as.numeric(length(listCRN))){
 	dataCRN <- nsciData %>% filter(CRN == listCRN[i])
-	fileName <- paste0("../output/workbooks/NSCI/",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",nsciVar,".xlsx")
+	fileName <- paste0("../output/workbooks/NSCI/",dataCRN$Semester,"-",dataCRN$Year,"-",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",nsciVar,".xlsx")
 	courseData <- tibble(Student.Name=dataCRN$Name,Student.ID=dataCRN$ID,!!as.character(nsciVar):=NA)
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
@@ -167,7 +167,7 @@ listCRN <- unique(probData$CRN)
 files <- NULL
 for (i in 1:as.numeric(length(listCRN))){
 	dataCRN <- probData %>% filter(CRN == listCRN[i])
-	fileName <- paste0("../output/workbooks/PROB/",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",probVar,".xlsx")
+	fileName <- paste0("../output/workbooks/PROB/",dataCRN$Semester,"-",dataCRN$Year,"-",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",probVar,".xlsx")
 	courseData <- tibble(Student.Name=dataCRN$Name,Student.ID=dataCRN$ID,!!as.character(probVar):=NA)
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
@@ -182,7 +182,7 @@ listCRN <- unique(quanData$CRN)
 files <- NULL
 for (i in 1:as.numeric(length(listCRN))){
 	dataCRN <- quanData %>% filter(CRN == listCRN[i])
-	fileName <- paste0("../output/workbooks/QUAN/",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",quanVar,".xlsx")
+	fileName <- paste0("../output/workbooks/QUAN/",dataCRN$Semester,"-",dataCRN$Year,"-",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",quanVar,".xlsx")
 	courseData <- tibble(Student.Name=dataCRN$Name,Student.ID=dataCRN$ID,!!as.character(quanVar):=NA)
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
@@ -197,7 +197,7 @@ listCRN <- unique(ssocData$CRN)
 files <- NULL
 for (i in 1:as.numeric(length(listCRN))){
 	dataCRN <- ssocData %>% filter(CRN == listCRN[i])
-	fileName <- paste0("../output/workbooks/SSOC/",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",ssocVar,".xlsx")
+	fileName <- paste0("../output/workbooks/SSOC/",dataCRN$Semester,"-",dataCRN$Year,"-",dataCRN$Instructor.Last,"-",dataCRN$College,"-",dataCRN$Course,"-",dataCRN$Section,"-",ssocVar,".xlsx")
 	courseData <- tibble(Student.Name=dataCRN$Name,Student.ID=dataCRN$ID,!!as.character(ssocVar):=NA)
 	courseData <- arrange(courseData,Student.Name)
 	write_xlsx(x=list(meta.data,courseData),path=fileName)
