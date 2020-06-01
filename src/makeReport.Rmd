@@ -35,6 +35,9 @@ panderOptions('keep.trailing.zeros', TRUE)
 ```
 
 ```{r summarize, echo=FALSE, error=FALSE, warning=FALSE, message=FALSE}
+## LOAD CLEAN DATA
+cleanData <- read_csv("../output/data/cleanData.csv")
+
 ## SUMMARIZE DATA BY COMPETENCY
 #--> COLL
 collData <- read_csv("../output/data/collData.csv")
@@ -133,7 +136,7 @@ summaryTable <- summaryTable %>%
 write_csv(summaryTable, "../output/data/reportTable.csv")
 ```
 
-The General Education instructional dataset for the `r ssocData$Semester[1]` semester of `r ssocData$Year[1]` included a total of `r comma(summaryTable[11,6],format="d")` student records. This represented `r comma(summaryTable[11,2],format="d")` courses which were delivered in `r comma(summaryTable[11,3],format="d")` total sections. These classes were taught by `r comma(summaryTable[11,4],format="d")` different instructors. Some students were enrolled in more than one General Education course for a particular competency. Therefore, there were fewer unique students than records. In addition, some courses count for more than one of the General Education core competencies (double- or triple-dippers). Because of this, there are more total values (when adding up all the competencies) than the original dataset actually contained. Here is a brief breakdown of the records for this semester.
+The General Education instructional dataset for the `r ssocData$Semester[1]` semester of `r ssocData$Year[1]` included a total of `r comma(summaryTable[11,6],format="d")` student records. This represented `r comma(length(unique(cleanData$Course)),format="d")` unique courses that were delivered in `r comma(length(unique(cleanData$CRN)),format="d")` total sections. These classes were taught by `r comma(length(unique(cleanData$Instructor)),format="d")` unique instructors. Some students were enrolled in more than one General Education course for a particular competency and some instructors taught courses with more than one General Education designation. Because of this, there are more total values (when adding up all the competencies) than the original dataset actually contained. Here is a brief breakdown of the records for this semester.
 
 ```{r table, echo=FALSE}
 ## PUT THE TIBBLE IN THE DOCUMENT AS A TABLE

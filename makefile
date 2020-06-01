@@ -10,7 +10,7 @@
 
 ## Setting variables for the Makefile
 RAW = rawdata
-RAWDATA = rawdata/202001_GenEd-Data_Rec-20200423.xlsx
+RAWDATA = rawdata/Test_Dataset_2.xlsx
 DAT = output/data
 REP = output/documents
 WKB = output/workbooks
@@ -22,18 +22,18 @@ help: $(REP)/help.html
 $(REP)/help.html: $(SRC)/makeHelp.Rmd
 	@cd $(SRC); Rscript -e "rmarkdown::render('makeHelp.Rmd', quiet = TRUE, output_file = '../$(REP)/help.html')"
 
-reports: $(REP)/report.html $(REP)/report.docx $(REP)/report.pdf $(RAWDATA)
+reports: $(REP)/report.html $(REP)/report.docx $(REP)/report.pdf
 	@open $(REP)/report.html
 	@open $(REP)/report.docx
 	@open $(REP)/report.pdf
 
-$(REP)/report.html: $(SRC)/makeReport.Rmd $(DAT)/cleanData.csv $(RAWDATA)
+$(REP)/report.html: $(SRC)/makeReport.Rmd $(DAT)/cleanData.csv
 	@cd $(SRC); Rscript -e "rmarkdown::render('makeReport.Rmd', quiet = TRUE, output_file = '../$(REP)/report.html')" > /dev/null 2>&1
 
-$(REP)/report.pdf: $(SRC)/makeReport.Rmd $(DAT)/cleanData.csv $(RAWDATA)
+$(REP)/report.pdf: $(SRC)/makeReport.Rmd $(DAT)/cleanData.csv
 	@cd $(SRC); Rscript -e "rmarkdown::render('makeReport.Rmd', output_format = c('pdf_document'), quiet = TRUE, output_file = '../$(REP)/report.pdf')" > /dev/null 2>&1
 
-$(REP)/report.docx: $(SRC)/makeReport.Rmd $(DAT)/cleanData.csv $(RAWDATA)
+$(REP)/report.docx: $(SRC)/makeReport.Rmd $(DAT)/cleanData.csv
 	@cd $(SRC); Rscript -e "rmarkdown::render('makeReport.Rmd', output_format = c('word_document'), quiet = TRUE, output_file = '../$(REP)/report.docx')" > /dev/null 2>&1
 
 emails: $(DAT)/logFile.csv $(SRC)/sendEmails.R
@@ -44,7 +44,7 @@ $(DAT)/logFile.csv: $(SRC)/makeSpreadsheets.R $(DAT)/cleanData.csv
 
 workbooks: $(DAT)/logFile.csv
 
-$(DAT)/cleanData.csv: $(SRC)/cleanData.R $(RAWDATA)
+$(DAT)/cleanData.csv: $(SRC)/cleanData.R
 	@cd $(SRC); R CMD BATCH cleanData.R
 
 test:

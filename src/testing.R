@@ -213,7 +213,7 @@ composedEmails <- testList %>%
 	mutate(
 		To = sprintf('%s <%s>', Full.Name, Email),
 		From = email_sender,
-		Subject = sprintf('Reporting General Education %s assessment results for %s section %s, %s %s', Outcome, Course, Section, Semester, Year),
+		Subject = sprintf('[Encrypt]: Reporting General Education %s assessment results for %s section %s, %s %s', Outcome, Course, Section, Semester, Year),
 		Body = sprintf(body,dueDate),
 		Attachment = Attachment) %>%
 	select(To, From, Subject, Body, Attachment)

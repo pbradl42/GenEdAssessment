@@ -50,3 +50,4 @@ output/workbooks/*
 
 # the output files are not needed for the scripts
 src/*.Rout
+src/encryption.R
