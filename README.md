@@ -1,7 +1,7 @@
-### Background ###  
+### Background  
 This project was created to facilitate a new assessment process for the General Education program at Ferris State University. Using a raw data file produced by the Registrar and Institutional Research, these `R` scripts create Excel workbooks and emails them to the instructors of each unique CRN. This can amount to around 1,200 files each semester.
 
-### Configuration ###
+### Configuration  
 To ensure maximal reproducibility, the amount of manual configuration needed between different data runs has been minimized. There are really only a few things that you need to do.  
 
 1. Place the new raw data file in the `rawdata` directory.  
@@ -18,7 +18,7 @@ To ensure maximal reproducibility, the amount of manual configuration needed bet
 1. Change `gm_auth_configure` to point to your credential file.
 1. Save - that is all!! You are now ready to proceed. Try running `make reports` and `make test` first. With those sorted out, you should be able to `make clean` and then `make workbooks` and `make emails` with your main raw data.
 
-### Running makefile Commands ###
+### Running makefile Commands  
 To further simplify and automate this process, the assessment workbooks are generated and emailed using a Gnu makefile. Makefiles only run scripts when they are needed (i.e. after one or more of their dependencies have been altered). The make file for this project currently has six targets. You can run them from the command line (within the `GenEdAssessment` directory) using the following commands.
 
 **`make`** - Just typing `make` will execute the recipe for the default target. In this project, the default target generates this help file as an html document (`output/documents/help.html`) and opens it in the default web browser.  
@@ -35,7 +35,7 @@ To further simplify and automate this process, the assessment workbooks are gene
 
 **`make clean`** - This target erases _all_ of the contents of the temporary directories (`output/data`, `output/documents`, and `output/workbooks`). That allows you to generate new files again by using the commands above.  
 
-### File Structure ###
+### File Structure  
 ```R
 .
 ├── GenEdAssessment.Rproj   =  RStudio project file
@@ -57,7 +57,7 @@ To further simplify and automate this process, the assessment workbooks are gene
 └── Test_Dataset.xlsx       =  Dataset for testing purposes. Add instructor info and put in rawdata
 ```
 
-### The R Scripts ###
+### The R Scripts  
 
 **`makeHelp.Rmd`** - When run through `knitr`, this script generates the help document (`help.html`) that you are currently reading. This help file is stored in `output/documents/`.  
 
