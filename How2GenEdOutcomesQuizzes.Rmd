@@ -1,0 +1,71 @@
+---
+title: "How2AddRubric2Quiz"
+author: "Peter Bradley"
+date: "4/22/2022"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### 0.5 Locate your outcome
+
+### 1. Upload the outcome
+
+![Starting image: click on 'Outcomes' in the left hand mneu](./images/canvas_outcome_upload_start.png)
+
+Click 'import' on the top menu.
+
+![Upload popup](./images/canvas_outcome_upload.png)
+Click anywhere to open the file chooser.
+
+![Mac file chooser, yours may look different](./images/canvas_outcome_choose_file.png)
+Choose the CSV file corresponding to the outcome we're assessing this year. Once the file is uploaded, you'll see a 'processing' page for a moment.
+
+![Outcome upload complete](./images/canvas_upload_wait.png)
+
+
+When complete, it should show:
+
+![Outcome upload complete](./images/canvas_outcome_complete.png)
+
+### 2. Extract the rubric
+
+Navigate to the 'Rubrics' section using the left-hand menu.
+
+![Outcome upload complete](./images/canvas_goto_rubric.png)
+
+![Outcome upload complete](./images/canvas_rubric_create.png)
+
+
+![Choose 'find outcome'](./images/canvas_rubric_find_outcome.png)
+Click on 'Find Outcome'
+
+![Choose the outcome you uploaded previoously](./images/canvas_rubric_choose_outcome.png)
+
+![Note the importance of this checkbox](./images/canvas_rubric_note.png)
+
+See Enabling Learning Mastery Gradebook.
+
+### 3. Create the Quiz
+
+![Note the importance of this checkbox](./images/canvas_create_quiz.png)
+
+![Note the importance of this checkbox](./images/canvas_quiz_attach_rubric.png)
+
+![Note the importance of this checkbox](./images/canvas_quiz_find_rubric.png)
+
+![Note the importance of this checkbox](./images/canvas_quiz_choose_rubric.png)
+
+![Note the importance of this checkbox](./images/canvas_quiz_add_item.png)
+
+![Note the importance of this checkbox](./images/canvas_quiz_choose_item_type.png)
+
+![Note the importance of this checkbox](./images/canvas_quizitem_choose_rubric.png)
+
+
+![Note the importance of this checkbox](./images/canvas_quizitem_choose_rubric2.png)
+

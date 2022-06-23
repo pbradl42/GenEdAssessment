@@ -1,0 +1,39 @@
+---
+title: Competency Rubric
+output: 
+ html_document:
+  css: "/Users/peterbradley/Documents/GitHub/GenEdAssessment/rubrics/rubrics.css"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(kableExtra)
+readRDS("myCompetency.RDS") -> myCompetency
+readRDS("myCompetencyDF.RDS") -> myCompetencyDF
+myrow <- readRDS("myN.RDS")
+```
+
+
+```{css echo=FALSE}
+#header {
+    display: none;
+  }
+```
+## Core Competency Scoring Rubric
+
+
+### `r myCompetency$name` - `r myCompetencyDF[myrow,]$display_name`
+
+**`r myCompetencyDF[myrow,]$title`**: `r myCompetencyDF[myrow,]$description`
+
+```{r buildTable, echo=FALSE}
+rubricTable <- data.frame("Level"=c("#### 4 - Advanced\n\nAdvanced performances exceed the expectations for Ferris graduates. This work shows an effective and well-developed response to the learning outcome. These students represent the strongest fraction of our graduates.",
+					 "#### 3 - Proficient\n\nProficient performances meet the expectations for Ferris graduates. This work demonstrates a sufficient response to the learning outcome with regard to scope and accuracy. All students are expected to attain this level of ability by graduation.",
+					 "#### 2 - Progressing\n\nDeveloping performances approach the expectations for Ferris graduates. Although this work is more accomplished than that of novices, the scope and accuracy of the response does not yet satisfactorily address the learning outcome. This should be true of most first and second year students.",
+					 "#### 1 - Beginning\n\nBeginning performances do not meet the expectations for Ferris graduates. This work exhibits a novice level of ability with regard to addressing the learning outcome. This is the expected skill level for our incoming first year students",
+					 "#### 0 - Unsatisfactory\n\nUnsatisfactory performances neither meet the expectations for Ferris graduates nor those for incoming freshmen. This work exhibits profound deficiencies and/or is incomplete."),
+		   "Description"=c(myCompetencyDF[myrow,]$value4, myCompetencyDF[myrow,]$value3, myCompetencyDF[myrow,]$value2, myCompetencyDF[myrow,]$value1, myCompetencyDF[myrow,]$value0))
+
+kable(rubricTable)
+```

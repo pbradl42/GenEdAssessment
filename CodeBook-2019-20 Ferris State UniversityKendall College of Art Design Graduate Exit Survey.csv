@@ -1,0 +1,43 @@
+original,new
+Respondent.ID,Respondent.ID
+Collector.ID,Collector.ID
+Start.Date,Start.Date
+End.Date,End.Date
+In.regard.to.your.educational.experiences.at.Ferris.Kendall..please.indicate.your.level.of.satisfaction.with.your.knowledge.abilities.in.each.of.the.following.Ability to work in groups,GenEd-Ability_to_work_in_groups
+XAbility to work independently,GenEd-Ability_to_work_independently
+X.1Problem solving skills,GenEd-Problem_solving_skills
+X.2Creativity,GenEd-Creativity
+X.3Global Perspective,GenEd-Global_Perspective
+X.4Writing,GenEd-Writing
+X.5Oral Communication,GenEd-Oral_Communication
+X.6Information Technology,GenEd-Information_Technology
+X.7Quantitative Reasoning,GenEd-Quantitative_Reasoning
+X.8Scientific Understanding (Science lab classes),GenEd-Scientific_Understanding_(Science_lab_classes)
+I.believe.Ferris.State.University.Kendall.College.of.Art...Design.was.a.good.value.for.my.money.Response,GoodValue
+Which.of.the.following.best.describes.your.immediate.plans.after.graduation.Response,ImmediatePlans
+Did.you.complete.one.or.more.experienceships.internships..paid.or.unpaid..Ferris.Kendall.sponsored.or.not..practicums..clinical.experience..student.teaching..Response,Experienceship
+Please.indicate.your.level.of.satisfaction.with.the.following.aspects.of.your.education.at.Ferris.Kendall.Sense of belonging at Ferris/Kendall,StudentLife-Sense_of_belonging_at_Ferris/Kendall
+X.9Overall Ferris/Kendall experience,StudentLife-Overall_Ferris/Kendall_experience
+X.10Education you received in your major,StudentLife-Education_you_received_in_your_major
+X.11Your level of involvement in campus activities,StudentLife-Your_level_of_involvement_in_campus_activities
+X.12Career support from faculty and staff,StudentLife-Career_support_from_faculty_and_staff
+X.13Preparation for work,StudentLife-Preparation_for_work
+X.14Preparation for continuing education,StudentLife-Preparation_for_continuing_education
+While.attending.Ferris.Kendall..were.you.active.in.any.registered.student.organizations..RSO.s..Response,RSO
+I.am.aware.of.FSU.KEN.career.resources.available.to.me.after.graduation.Response,Career
+Would.you.recommend.Ferris.Kendall.to.a.family.member.or.friend.Response,Recommend
+X.15Why or why not?,X.15Why or why not?
+Please.indicate.your.level.of.agreement.with.the.statement...I.m.proud.I.attended.Ferris.State.University.Kendall.College.of.Art...Design..Response,Proud
+X.16Why or why not?,X.16Why or why not?
+From.which.college.s..did.you.graduate...Select.all.that.apply..College of Arts & Sciences,College-College_of_Arts_&_Sciences
+X.17College of Business,College-College_of_Business
+X.18College of Education & Human Services,College-College_of_Education_&_Human_Services
+X.19College of Engineering Technology,College-College_of_Engineering_Technology
+X.20College of Health Professions,College-College_of_Health_Professions
+X.21College of Optometry,College-College_of_Optometry
+X.22College of Pharmacy,College-College_of_Pharmacy
+X.23College of Professional & Technical Studies,College-College_of_Professional_&_Technical_Studies
+X.24Kendall College of Art & Design,College-Kendall_College_of_Art_&_Design
+What.do.you.feel.is.the.best.thing.about.Ferris.Kendall.Open-Ended Response,What.do.you.feel.is.the.best.thing.about.Ferris.Kendall.Open-Ended Response
+If.you.could.change.something.about.Ferris.Kendall..what.would.it.be.Open-Ended Response,If.you.could.change.something.about.Ferris.Kendall..what.would.it.be.Open-Ended Response
+Please.use.this.space.for.additional.comments.Open-Ended Response,Please.use.this.space.for.additional.comments.Open-Ended Response
