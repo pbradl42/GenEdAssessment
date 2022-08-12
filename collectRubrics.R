@@ -62,7 +62,9 @@ rubric_read <- function(myN, myCompetency) {
 		rubric_reconstruct()
 	myRubric$description <- paste(raw_text[3:6], collapse=" ")
 	myRubric <- myRubric %>%
-		mutate(description = gsub("Evaluated.*\\.", "", description))
+		mutate(description = gsub("Evaluated.*\\.", "", description)) %>%
+		mutate(description = gsub("\\&", "and", description)) %>%
+		mutate(characteristics = gsub("\\&", "and", characteristics))
 	myRubric$Competency <- myCompetency
 	myRubric$FLO <- myN
 	return(myRubric)
@@ -200,3 +202,7 @@ setup_pdf_rubric <- function(abbr_comp, CoreCompetencies, allRubricsList) {
 	saveRDS(myCompetencyDF, file="myCompetencyDF.RDS")
 	lapply(c(1:4), write_pdf_rubric, abbr_comp) -> out
 }
+
+
+lapply(CoreCompetencies$Competency, setup_pdf_rubric, CoreCompetencies, allRubricsList)
+

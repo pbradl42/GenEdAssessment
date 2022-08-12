@@ -1,12 +1,33 @@
 ---
-title: Competency Rubric
-output: 
- html_document:
-  css: "/Users/peterbradley/Documents/GitHub/GenEdAssessment/rubrics/rubrics.css"
+title: "Competency Rubric"
+header-includes:
+- \usepackage{booktabs}
+- \usepackage{longtable}
+- \usepackage{array}
+- \usepackage{multirow}
+- \usepackage{wrapfig}
+- \usepackage{float}
+- \usepackage{colortbl}
+- \usepackage{pdflscape}
+- \usepackage{tabu}
+- \usepackage{threeparttable}
+- \usepackage{threeparttablex}
+- \usepackage[normalem]{ulem}
+- \usepackage{makecell}
+- \usepackage{xcolor}
+- \usepackage[margin=1in]{geometry}
+documentclass: article
+output:
+  pdf_document: default
+  html_document:
+    css: /Users/peterbradley/Documents/GitHub/GenEdAssessment/rubrics/rubrics.css
+always_allow_html: yes
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+options(kableExtra.latex.load_packages = FALSE)
+library(tidyverse)
 library(knitr)
 library(kableExtra)
 readRDS("myCompetency.RDS") -> myCompetency
@@ -26,14 +47,36 @@ myrow <- readRDS("myN.RDS")
 ### `r myCompetency$name` - `r myCompetencyDF[myrow,]$display_name`
 
 **`r myCompetencyDF[myrow,]$title`**: `r myCompetencyDF[myrow,]$description`
-
-```{r buildTable, echo=FALSE}
-rubricTable <- data.frame("Level"=c("#### 4 - Advanced\n\nAdvanced performances exceed the expectations for Ferris graduates. This work shows an effective and well-developed response to the learning outcome. These students represent the strongest fraction of our graduates.",
-					 "#### 3 - Proficient\n\nProficient performances meet the expectations for Ferris graduates. This work demonstrates a sufficient response to the learning outcome with regard to scope and accuracy. All students are expected to attain this level of ability by graduation.",
-					 "#### 2 - Progressing\n\nDeveloping performances approach the expectations for Ferris graduates. Although this work is more accomplished than that of novices, the scope and accuracy of the response does not yet satisfactorily address the learning outcome. This should be true of most first and second year students.",
-					 "#### 1 - Beginning\n\nBeginning performances do not meet the expectations for Ferris graduates. This work exhibits a novice level of ability with regard to addressing the learning outcome. This is the expected skill level for our incoming first year students",
-					 "#### 0 - Unsatisfactory\n\nUnsatisfactory performances neither meet the expectations for Ferris graduates nor those for incoming freshmen. This work exhibits profound deficiencies and/or is incomplete."),
+```{r defineTable, echo=FALSE}
+rubricTable <- data.frame("Level"=c("<strong>4 - Advanced</strong>\nAdvanced performances exceed the expectations for Ferris graduates. This work shows an effective and well-developed response to the learning outcome. These students represent the strongest fraction of our graduates.",
+					 "<strong>3 - Proficient</strong>\nProficient performances meet the expectations for Ferris graduates. This work demonstrates a sufficient response to the learning outcome with regard to scope and accuracy. All students are expected to attain this level of ability by graduation.",
+					 "<strong>2 - Progressing</strong>\nDeveloping performances approach the expectations for Ferris graduates. Although this work is more accomplished than that of novices, the scope and accuracy of the response does not yet satisfactorily address the learning outcome. This should be true of most first and second year students.",
+					 "<strong>1 - Beginning</strong>\nBeginning performances do not meet the expectations for Ferris graduates. This work exhibits a novice level of ability with regard to addressing the learning outcome. This is the expected skill level for our incoming first year students",
+					 "<strong>0 - Unsatisfactory</strong>\nUnsatisfactory performances neither meet the expectations for Ferris graduates nor those for incoming freshmen. This work exhibits profound deficiencies and/or is incomplete."),
 		   "Description"=c(myCompetencyDF[myrow,]$value4, myCompetencyDF[myrow,]$value3, myCompetencyDF[myrow,]$value2, myCompetencyDF[myrow,]$value1, myCompetencyDF[myrow,]$value0))
+```
+```{r buildTable, include=knitr::is_latex_output(), echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+rubricTableLatex <- rubricTable %>%
+	mutate(Level = gsub("<strong>", "\\\\textbf{", Level)) %>%
+	mutate(Level = gsub("</strong>", "}", Level)) 
+colnames(rubricTableLatex) <- c('Level',"Description")
+rubricTableLatex %>%
+	mutate_all(linebreak) %>%
+	kable(format='latex',caption="Caption",
+        col.names = c('Level',"Description"), booktabs = T, escape = FALSE) %>%
+	column_spec(1:2, width="3in") %>%
+	row_spec(0, color="white", align="c", bold=TRUE, background="red") %>%
+	kable_styling(bootstrap_options = c("striped", "hover"))
+```
 
-kable(rubricTable)
+```{r buildTableHTML, include=knitr::is_html_output(), echo=FALSE, message=FALSE, warning=FALSE}
+
+
+rubricTable %>%
+#	mutate_all(linebreak) %>%
+	kable(format='html',caption="Caption",
+        col.names = c('Level',"Description"), booktabs = T, escape = FALSE) %>%
+	column_spec(1:2, width="3in") %>%
+	row_spec(0, color="white", align="c", bold=TRUE, background="#cc0033") %>%
+	kable_styling(bootstrap_options = c("striped", "hover"))
 ```

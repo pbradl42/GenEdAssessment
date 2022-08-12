@@ -1,6 +1,8 @@
 ### Background  
 This project was created to facilitate a new assessment process for the General Education program at Ferris State University. Using a raw data file produced by the Registrar and Institutional Research, these `R` scripts create Excel workbooks and emails them to the instructors of each unique CRN. This can amount to around 1,200 files each semester.
 
+8/12/22 - Added script ('collectRubrics.R' and 'createPDFRubric.Rmd') to recreate the Rubric files in PDF and HTML form. This reads from the 'old' rubrics stored in '/rubrics' and writes out the new format to the same directory. -PB
+
 ### Configuration  
 To ensure maximal reproducibility, the amount of manual configuration needed between different data runs has been minimized. There are really only a few things that you need to do.  
 
